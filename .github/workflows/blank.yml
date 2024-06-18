@@ -1,0 +1,26 @@
+name: 'Deploy Configuration'
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    name: Plan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Plan
+        run: bash plan.sh
+
+  apply:
+    name: Apply
+    runs-on: ubuntu-latest
+    environment: TELECOM_APPROVAL
+    steps:
+      - name: Apply
+        run: bash plan.sh
